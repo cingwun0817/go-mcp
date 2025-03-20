@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"log"
+	"os"
 
 	"github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"
@@ -30,12 +30,12 @@ func main() {
 		return mcp.NewToolResultText("Hello " + name), nil
 	})
 
-	// srv := server.NewStdioServer(s)
-	// srv.Listen(context.Background(), os.Stdin, os.Stdout)
+	srv := server.NewStdioServer(s)
+	srv.Listen(context.Background(), os.Stdin, os.Stdout)
 
-	srv := server.NewSSEServer(s)
-	log.Printf("SSE server listening on localhost:8081\n")
-	srv.Start("localhost:8081")
+	// srv := server.NewSSEServer(s)
+	// log.Printf("SSE server listening on localhost:8081\n")
+	// srv.Start("localhost:8081")
 
 	// if err := server.ServeStdio(s); err != nil {
 	// 	fmt.Printf("Server error: %v\n", err)
